@@ -1,8 +1,112 @@
 [
   {
-    "ContainingType": "Cursos.API.Controllers.CursosController",
+    "ContainingType": "Cursos.API.Controllers.AlunoController",
+    "Method": "ObterAlunos",
+    "RelativePath": "api/v1/aluno",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Cursos.API.Domain.Aluno, Cursos.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Cursos.API.Controllers.AlunoController",
+    "Method": "NovoAluno",
+    "RelativePath": "api/v1/aluno",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "post",
+        "Type": "Cursos.API.Controllers.AlunoController\u002BAlunoPost",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Cursos.API.Controllers.AlunoController",
+    "Method": "ObterAluno",
+    "RelativePath": "api/v1/aluno/{alunoId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "alunoId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Cursos.API.Domain.Aluno",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Cursos.API.Controllers.AlunoController",
+    "Method": "EditarAluno",
+    "RelativePath": "api/v1/aluno/{alunoId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "alunoId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "nome",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Cursos.API.Controllers.AlunoController",
+    "Method": "ExcluirAluno",
+    "RelativePath": "api/v1/aluno/{alunoId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "alunoId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Cursos.API.Controllers.CursoController",
     "Method": "ObterCursos",
-    "RelativePath": "curso",
+    "RelativePath": "api/v1/curso",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -20,25 +124,25 @@
     ]
   },
   {
-    "ContainingType": "Cursos.API.Controllers.CursosController",
+    "ContainingType": "Cursos.API.Controllers.CursoController",
     "Method": "NovoCurso",
-    "RelativePath": "curso",
+    "RelativePath": "api/v1/curso",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "post",
-        "Type": "Cursos.API.Controllers.CursosController\u002BPost",
+        "Type": "Cursos.API.Controllers.CursoController\u002BCursoPost",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "Cursos.API.Controllers.CursosController",
+    "ContainingType": "Cursos.API.Controllers.CursoController",
     "Method": "ObterCurso",
-    "RelativePath": "curso/{cursoId}",
+    "RelativePath": "api/v1/curso/{cursoId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -62,9 +166,9 @@
     ]
   },
   {
-    "ContainingType": "Cursos.API.Controllers.CursosController",
+    "ContainingType": "Cursos.API.Controllers.CursoController",
     "Method": "EditarCurso",
-    "RelativePath": "curso/{cursoId}",
+    "RelativePath": "api/v1/curso/{cursoId}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -83,6 +187,22 @@
         "Name": "descricao",
         "Type": "System.String",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Cursos.API.Controllers.CursoController",
+    "Method": "ExcluirCurso",
+    "RelativePath": "api/v1/curso/{cursoId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cursoId",
+        "Type": "System.Int32",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []

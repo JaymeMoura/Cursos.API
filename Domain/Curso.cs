@@ -13,8 +13,8 @@ public class Curso
     }
 
     public void AlterarNome(string nome)
-        => NomeCurso = nome;
+        => NomeCurso = nome.Trim();
 
     public void AlterarDescricao(string descricao)
-        => Descricao = descricao;
+        => Descricao = descricao.Trim();
 }

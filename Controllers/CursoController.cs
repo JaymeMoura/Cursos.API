@@ -5,12 +5,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Cursos.API.Controllers;
 
-[Route("curso")]
-public class CursosController : Controller
+[Route("api/v1/curso")]
+public class CursoController : Controller
 {
     private readonly AppDbContext _context;
 
-    public CursosController(AppDbContext context)
+    public CursoController(AppDbContext context)
     {
         _context = context;
     }
@@ -37,9 +37,9 @@ public class CursosController : Controller
     }
 
     // === POST
-    public record Post(string nome, string descricao);
+    public record CursoPost(string nome, string descricao);
     [HttpPost]
-    public async Task<ActionResult> NovoCurso([FromBody] Post post)
+    public async Task<ActionResult> NovoCurso([FromBody] CursoPost post)
     {
         if (string.IsNullOrWhiteSpace(post.nome))
             return BadRequest("Informe um nome válido!");
@@ -52,12 +52,12 @@ public class CursosController : Controller
         _context.Cursos.Add(curso);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction(nameof(ObterCurso), new { id = curso.CursoId }, curso);
+        return CreatedAtAction(nameof(ObterCurso), new { cursoId = curso.CursoId }, curso);
     }
 
     // === PUT
     [HttpPut("{cursoId}")]
-    public async Task<ActionResult> EditarCurso(int cursoId, Post post)
+    public async Task<ActionResult> EditarCurso(int cursoId, CursoPost post)
     {
         var curso = await _context.Cursos.FirstOrDefaultAsync(x => x.CursoId == cursoId);
         if (curso == null)
