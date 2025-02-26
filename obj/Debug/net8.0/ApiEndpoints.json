@@ -75,7 +75,7 @@
         "IsRequired": true
       },
       {
-        "Name": "nome",
+        "Name": "nomeAluno",
         "Type": "System.String",
         "IsRequired": false
       },
@@ -179,7 +179,7 @@
         "IsRequired": true
       },
       {
-        "Name": "nome",
+        "Name": "nomeCurso",
         "Type": "System.String",
         "IsRequired": false
       },
@@ -201,6 +201,80 @@
     "Parameters": [
       {
         "Name": "cursoId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Cursos.API.Controllers.MatriculaController",
+    "Method": "MatricularAluno",
+    "RelativePath": "api/v1/matricula",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "alunoId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "cursoId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Cursos.API.Controllers.MatriculaController",
+    "Method": "RemoverAlunoDoCurso",
+    "RelativePath": "api/v1/matricula",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "alunoId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "cursoId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Cursos.API.Controllers.MatriculaController",
+    "Method": "ObterAlunosDoCurso",
+    "RelativePath": "api/v1/matricula/{cursoId}/curso",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cursoId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Cursos.API.Controllers.MatriculaController",
+    "Method": "ObterMatricula",
+    "RelativePath": "api/v1/matricula/{matriculaId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "matriculaId",
         "Type": "System.Int32",
         "IsRequired": true
       }

@@ -25,6 +25,19 @@ public class MatriculaController : Controller
         return Ok(matricula);
     }
 
+    [HttpGet("{cursoId}/curso")]
+    public async Task<ActionResult> ObterAlunosDoCurso(int cursoId)
+    {
+        List<Matricula> matriculas = await _context.Matriculas.Where(x => x.CursoId == cursoId)
+            .Include(x => x.Aluno)
+            .ToListAsync();
+
+        if (matriculas.Count == 0)
+            return NotFound("Esse curso não possui nenhum aluno!");
+
+        return Ok(matriculas);
+    }
+
     [HttpPost]
     public async Task<ActionResult> MatricularAluno(int alunoId, int cursoId)
     {
@@ -47,5 +60,27 @@ public class MatriculaController : Controller
         return CreatedAtAction(nameof(ObterMatricula), new { matriculaId = matricula.MatriculaId}, matricula);
     }
 
+    [HttpDelete]
+    public async Task<ActionResult> RemoverAlunoDoCurso(int alunoId, int cursoId)
+    {
+        Aluno? aluno = await _context.Alunos.FirstOrDefaultAsync(x => x.AlunoId == alunoId);
+        if (aluno == null)
+            return NotFound("Aluno não existe ou não foi encontrado.");
+
+        Curso? curso = await _context.Cursos.FirstOrDefaultAsync(x => x.CursoId == cursoId);
+        if (curso == null)
+            return NotFound("Curso não encontrado.");
+
+        Matricula? matricula = await _context.Matriculas
+            .FirstOrDefaultAsync(x => x.CursoId == cursoId && x.AlunoId == alunoId);
+
+        if(matricula == null)
+            return NotFound("Aluno não está matriculado nesse curso!");
+
+        _context.Matriculas.Remove(matricula);
+        _context.SaveChanges();
+
+        return Ok(matricula);
+    }
 
 }

@@ -38,12 +38,15 @@ public class AlunoController : Controller
     }
 
     // === POST
-    public record AlunoPost(string nome, string email, DateTime dataNascimento);
+    public record AlunoPost(string nomeAluno, string email, DateTime dataNascimento);
     [HttpPost]
     public async Task<ActionResult> NovoAluno([FromBody] AlunoPost post)
     {
-        if (string.IsNullOrWhiteSpace(post.nome))
-            return BadRequest("Informe um nome válido!");
+        if (post == null)
+            return BadRequest("Informe uma data Valida!");
+
+        if (string.IsNullOrWhiteSpace(post.nomeAluno))
+            return BadRequest("Informe um nome válido para o Aluno(a)!");
 
         if (string.IsNullOrWhiteSpace(post.email))
             return BadRequest("Informe um email válido!");
@@ -51,7 +54,10 @@ public class AlunoController : Controller
         if (post.dataNascimento == DateTime.MinValue)
             return BadRequest("Informe uma data Valida!");
 
-        Aluno aluno = new(post.nome, post.email, post.dataNascimento);
+        if (await _context.Alunos.AnyAsync(x => x.Email == post.email))
+            return BadRequest("Já existe um aluno ultilizando esse email!");
+
+        Aluno aluno = new(post.nomeAluno, post.email, post.dataNascimento);
 
         if (aluno.IsValidEmail(post.email) == false)
             return BadRequest("Informe um email válido!");
@@ -66,18 +72,26 @@ public class AlunoController : Controller
     }
 
     // === PUT
-    public record Put(string nome, string email);
+    public record Put(string nomeAluno, string email);
     [HttpPut("{alunoId}")]
     public async Task<ActionResult> EditarAluno(int alunoId, Put put)
     {
         var aluno = await _context.Alunos.FirstOrDefaultAsync(x => x.AlunoId == alunoId);
+
         if (aluno == null)
-            return NotFound("Aluno não existe ou não foi encontrado.");
+            return NotFound("Aluno(a) não existe ou não foi encontrado.");
+
         int cont = 0;
 
-        if (aluno.NomeAluno != put.nome)
+        if (string.IsNullOrWhiteSpace(put.nomeAluno))
+            return BadRequest("Informe um nome válido para o Aluno(a)!");
+
+        if (string.IsNullOrWhiteSpace(put.email))
+            return BadRequest("Informe um email válido!");
+
+        if (aluno.NomeAluno != put.nomeAluno)
         {
-            aluno.AlterarNome(put.nome);
+            aluno.AlterarNome(put.nomeAluno);
             cont++;
         }
 
@@ -108,7 +122,7 @@ public class AlunoController : Controller
     {
         var aluno = await _context.Alunos.FirstOrDefaultAsync(x => x.AlunoId == alunoId);
         if (aluno == null)
-            return NotFound("Aluno não existe ou não foi encontrado.");
+            return NotFound("Aluno(a) não existe ou não foi encontrado.");
 
         _context.Alunos.Remove(aluno);
         _context.SaveChanges();

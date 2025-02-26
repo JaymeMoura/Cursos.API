@@ -37,17 +37,17 @@ public class CursoController : Controller
     }
 
     // === POST
-    public record CursoPost(string nome, string descricao);
+    public record CursoPost(string nomeCurso, string descricao);
     [HttpPost]
     public async Task<ActionResult> NovoCurso([FromBody] CursoPost post)
     {
-        if (string.IsNullOrWhiteSpace(post.nome))
-            return BadRequest("Informe um nome válido!");
+        if (string.IsNullOrWhiteSpace(post.nomeCurso))
+            return BadRequest("Informe um nomeCurso válido!");
 
         if (string.IsNullOrWhiteSpace(post.descricao))
             return BadRequest("Informe uma descrição válida!");
 
-        Curso curso = new Curso(post.nome, post.descricao);
+        Curso curso = new Curso(post.nomeCurso, post.descricao);
 
         _context.Cursos.Add(curso);
         await _context.SaveChangesAsync();
@@ -64,9 +64,15 @@ public class CursoController : Controller
             return NotFound("Curso não encontrado.");
         int cont = 0;
 
-        if (curso.NomeCurso != post.nome)
+        if (string.IsNullOrWhiteSpace(post.nomeCurso))
+            return BadRequest("Informe um nomeCurso válido!");
+
+        if (string.IsNullOrWhiteSpace(post.descricao))
+            return BadRequest("Informe uma descrição válida!");
+
+        if (curso.NomeCurso != post.nomeCurso)
         {
-            curso.AlterarNome(post.nome);
+            curso.AlterarNome(post.nomeCurso);
             cont++;
         }
 
