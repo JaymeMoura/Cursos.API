@@ -107,4 +107,3 @@ C:\Users\jayme\source\repos\Cursos.API\Cursos.API\obj\Debug\net8.0\refint\Cursos
 C:\Users\jayme\source\repos\Cursos.API\Cursos.API\obj\Debug\net8.0\Cursos.API.pdb
 C:\Users\jayme\source\repos\Cursos.API\Cursos.API\obj\Debug\net8.0\Cursos.API.genruntimeconfig.cache
 C:\Users\jayme\source\repos\Cursos.API\Cursos.API\obj\Debug\net8.0\ref\Cursos.API.dll
-C:\Users\jayme\source\repos\Cursos.API\Cursos.API\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
